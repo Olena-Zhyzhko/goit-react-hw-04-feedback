@@ -18,16 +18,19 @@ export class App extends Component {
       )
   };
 
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return (good + neutral + bad);
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    const totalFeedback = this.countTotalFeedback();
+    return Math.round((good / totalFeedback) * 100)
+  };
+
   render() {
     const { good, neutral, bad } = this.state;
-
-    const countTotalFeedback = () => {
-    return (good + neutral + bad);
-    };
-
-    const countPositiveFeedbackPercentage = () => {
-      return Math.round((good / countTotalFeedback()) * 100)
-    };
 
     const buttons = ['good', 'neutral', 'bad']
 
@@ -47,8 +50,8 @@ export class App extends Component {
               good={good}
               neutral={neutral}
               bad={bad}
-              total={countTotalFeedback()}
-              positivePercentage={countPositiveFeedbackPercentage()}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
             >
             </Statistics>
           ) : (
