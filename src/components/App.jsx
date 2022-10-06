@@ -25,7 +25,7 @@ export function App () {
             break;
           
       default:
-        return console.log('кейсі не віполнились');
+        return;
         };
   };
 
